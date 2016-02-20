@@ -6,9 +6,9 @@ class TestClass(unittest.TestCase):
     def test_set_cell_state(self):
         game = GameOfLife()
         game.set_alive(1, 1)
-        self.assertTrue(game.is_alive(1, 1), "Cell is dead but should be alive")
+        self.assertTrue(game.is_alive(1, 1), "Cell should be alive")
         game.set_dead(1, 1)
-        self.assertFalse(game.is_alive(1, 1), "Cell is alive but should be dead")
+        self.assertFalse(game.is_alive(1, 1), "Cell should be dead")
 
     def test_cell_dies_with_no_neighbours(self):
         game = GameOfLife()
