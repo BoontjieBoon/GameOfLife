@@ -29,13 +29,7 @@ class GameOfLife:
         self.set_cell(x_coord, y_coord, False)
 
     def set_cell(self, x_coord, y_coord, alive):
-        if x_coord <= 0 or y_coord <= 0:
-            raise OutOfBoundsError
-        else:
-            try:
-                self._cells[x_coord - 1][y_coord - 1] = alive
-            except IndexError:
-                raise OutOfBoundsError
+        self._cells[x_coord - 1][y_coord - 1] = alive
 
     def is_alive(self, x_coord, y_coord):
         try:
@@ -72,8 +66,3 @@ class GameOfLife:
     @staticmethod
     def _empty_world(width, height):
         return [[False] * width for i in range(height)]
-
-
-class OutOfBoundsError(Exception):
-    def __init__(self):
-        pass

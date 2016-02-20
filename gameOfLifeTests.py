@@ -1,5 +1,5 @@
 import unittest
-from gameOfLife import GameOfLife, OutOfBoundsError
+from gameOfLife import GameOfLife
 
 
 class TestClass(unittest.TestCase):
@@ -9,14 +9,6 @@ class TestClass(unittest.TestCase):
         self.assertTrue(game.is_alive(1, 1), "Cell is dead but should be alive")
         game.set_dead(1, 1)
         self.assertFalse(game.is_alive(1, 1), "Cell is alive but should be dead")
-
-    def test_out_of_bounds(self):
-        width, height = 5, 3
-        game = GameOfLife()
-        self.assertRaises(OutOfBoundsError, game.set_alive, 0, 0)
-        self.assertRaises(OutOfBoundsError, game.set_dead, width + 1, height + 1)
-        self.assertFalse(game.is_alive(0, 0), "Out of bounds cells should always return dead")
-        self.assertFalse(game.is_alive(width + 1, height + 1), "Out of bounds cells should always return dead")
 
     def test_cell_dies_with_no_neighbours(self):
         game = GameOfLife()
