@@ -12,11 +12,8 @@ class GameOfLife:
     def height(self):
         return len(self._cells)
 
-    def __init__(self, width, height):
-        if width < 1 or height < 1:
-            raise WorldSizeError()
-        else:
-            self._cells = self._empty_world(width, height)
+    def __init__(self):
+        pass
 
     def __repr__(self):
         world_string = ['.' * self.width] * self.height
@@ -75,11 +72,6 @@ class GameOfLife:
     @staticmethod
     def _empty_world(width, height):
         return [[False] * width for i in range(height)]
-
-
-class WorldSizeError(Exception):
-    def __init__(self):
-        pass
 
 
 class OutOfBoundsError(Exception):
