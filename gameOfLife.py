@@ -34,19 +34,24 @@ class GameOfLife:
         return (x_coord, y_coord) in self._cells
 
     def tick(self):
-        next_gen_cells = GameOfLife._empty_world(self.width, self.height)
-        for x, y in self.cell_iter():
-            next_gen_cells[x - 1][y - 1] = self.tick_cell(x, y)
-        self._cells = next_gen_cells
+        next_generation_cells = set()
+        checked_cells = set()
+        for cell_x, cell_y in self._cells:
+            for x, y in product(range(cell_x - 1, cell_x + 2), range(cell_y - 1, cell_y + 2)):
+                if (x, y) not in checked_cells:
+                    checked_cells.add((x, y))
+                    if self.tick_cell(x, y):
+                        next_generation_cells.add((x, y))
+
+        self._cells = next_generation_cells
 
     def tick_cell(self, x_coord, y_coord):
-        live_neighbours = 0
-        for x, y in product(range(x_coord - 1, x_coord + 2), range(y_coord - 1, y_coord + 2)):
-            if x != x_coord or y != y_coord:
-                if self.is_alive(x, y):
-                    live_neighbours += 1
-                    if live_neighbours > 3:
-                        break
+        neighbours = set([(x, y)
+                         for x, y in product(range(x_coord - 1, x_coord + 2),
+                                             range(y_coord - 1, y_coord + 2))])
+        neighbours.remove((x_coord, y_coord))
+
+        live_neighbours = len(self._cells & neighbours)
 
         if self.is_alive(x_coord, y_coord):
             return 2 <= live_neighbours <= 3
@@ -58,7 +63,3 @@ class GameOfLife:
     def cell_iter(self):
         for x, y in product(range(self.width), range(self.height)):
             yield x + 1, y + 1
-
-    @staticmethod
-    def _empty_world(width, height):
-        return [[False] * width for i in range(height)]
