@@ -2,7 +2,7 @@ from itertools import product
 
 
 class GameOfLife:
-    _cells = []
+    _cells = set()
 
     @property
     def width(self):
@@ -13,6 +13,7 @@ class GameOfLife:
         return len(self._cells)
 
     def __init__(self):
+        self._cells = set()
         pass
 
     def __repr__(self):
@@ -23,19 +24,14 @@ class GameOfLife:
         return '\n'.join(world_string) + '\n\n'
 
     def set_alive(self, x_coord, y_coord):
-        self.set_cell(x_coord, y_coord, True)
+        self._cells.add((x_coord, y_coord))
 
     def set_dead(self, x_coord, y_coord):
-        self.set_cell(x_coord, y_coord, False)
-
-    def set_cell(self, x_coord, y_coord, alive):
-        self._cells[x_coord - 1][y_coord - 1] = alive
+        if (x_coord, y_coord) in self._cells:
+            self._cells.remove((x_coord, y_coord))
 
     def is_alive(self, x_coord, y_coord):
-        try:
-            return self._cells[x_coord - 1][y_coord - 1]
-        except IndexError:
-            return False
+        return (x_coord, y_coord) in self._cells
 
     def tick(self):
         next_gen_cells = GameOfLife._empty_world(self.width, self.height)
