@@ -50,5 +50,3 @@ class GameOfLife:
             return 2 <= live_neighbours <= 3
         else:
             return live_neighbours == 3
-
-        return False
