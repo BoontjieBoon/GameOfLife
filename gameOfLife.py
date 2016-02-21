@@ -23,6 +23,7 @@ class GameOfLife:
         # set to keep track of cell have already
         # been checked for the next generation
         checked_cells = set()
+
         for cell_x, cell_y in self._cells:
             # check all cell's neighbours for the next
             # generation because they might become alive
