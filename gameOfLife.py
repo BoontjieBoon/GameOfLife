@@ -6,7 +6,6 @@ class GameOfLife:
 
     def __init__(self):
         self._cells = set()
-        pass
 
     def set_alive(self, x_coord, y_coord):
         self._cells.add((x_coord, y_coord))
