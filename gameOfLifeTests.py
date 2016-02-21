@@ -14,6 +14,15 @@ class TestClass(unittest.TestCase):
         game.set_dead(1000, 1000)
         self.assertFalse(game.is_alive(1000, 1000), "Cell should be dead")
 
+    def test_set_parameters_are_integers(self):
+        game = GameOfLife()
+        self.assertRaises(ValueError, game.set_alive, 0.5, 1)
+        self.assertRaises(ValueError, game.set_alive, 1, 0.5)
+        self.assertRaises(ValueError, game.is_alive, 0.5, 1)
+        self.assertRaises(ValueError, game.is_alive, 1, 0.5)
+        self.assertRaises(ValueError, game.set_dead, 0.5, 1)
+        self.assertRaises(ValueError, game.set_dead, 1, 0.5)
+
     def test_cell_dies_with_no_neighbours(self):
         game = GameOfLife()
         game.set_alive(3, 3)

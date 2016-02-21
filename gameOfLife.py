@@ -8,13 +8,16 @@ class GameOfLife:
         self._cells = set()
 
     def set_alive(self, x, y):
+        GameOfLife.check_values(x, y)
         self._cells.add((x, y))
 
     def set_dead(self, x, y):
+        GameOfLife.check_values(x, y)
         if (x, y) in self._cells:
             self._cells.remove((x, y))
 
     def is_alive(self, x, y):
+        GameOfLife.check_values(x, y)
         return (x, y) in self._cells
 
     def tick(self):
@@ -56,3 +59,10 @@ class GameOfLife:
         else:
             # cell should only become alive with exactly 3 neighbours
             return live_neighbours == 3
+
+    @staticmethod
+    def check_values(x, y):
+        if not isinstance(x, int):
+            raise ValueError("x should be an integer")
+        if not isinstance(y, int):
+            raise ValueError("y should be an integer")
