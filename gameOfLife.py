@@ -7,15 +7,15 @@ class GameOfLife:
     def __init__(self):
         self._cells = set()
 
-    def set_alive(self, x_coord, y_coord):
-        self._cells.add((x_coord, y_coord))
+    def set_alive(self, x, y):
+        self._cells.add((x, y))
 
-    def set_dead(self, x_coord, y_coord):
-        if (x_coord, y_coord) in self._cells:
-            self._cells.remove((x_coord, y_coord))
+    def set_dead(self, x, y):
+        if (x, y) in self._cells:
+            self._cells.remove((x, y))
 
-    def is_alive(self, x_coord, y_coord):
-        return (x_coord, y_coord) in self._cells
+    def is_alive(self, x, y):
+        return (x, y) in self._cells
 
     def tick(self):
         next_generation_cells = set()
@@ -29,15 +29,16 @@ class GameOfLife:
 
         self._cells = next_generation_cells
 
-    def tick_cell(self, x_coord, y_coord):
-        neighbours = set([(x, y)
-                         for x, y in product(range(x_coord - 1, x_coord + 2),
-                                             range(y_coord - 1, y_coord + 2))])
-        neighbours.remove((x_coord, y_coord))
+    def tick_cell(self, x, y):
+        neighbours = set([(neighbour_x, neighbour_y)
+                          for neighbour_x, neighbour_y
+                          in product(range(x - 1, x + 2),
+                                     range(y - 1, y + 2))])
+        neighbours.remove((x, y))
 
         live_neighbours = len(self._cells & neighbours)
 
-        if self.is_alive(x_coord, y_coord):
+        if self.is_alive(x, y):
             return 2 <= live_neighbours <= 3
         else:
             return live_neighbours == 3
