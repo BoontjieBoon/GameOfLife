@@ -4,14 +4,6 @@ from itertools import product
 class GameOfLife:
     _cells = set()
 
-    @property
-    def width(self):
-        return len(self._cells[0])
-
-    @property
-    def height(self):
-        return len(self._cells)
-
     def __init__(self):
         self._cells = set()
         pass
