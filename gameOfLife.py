@@ -3,6 +3,8 @@ from itertools import product
 
 class GameOfLife:
     _cells = set()
+    _view_width = 5
+    _view_height = 5
 
     @property
     def width(self):
@@ -17,7 +19,7 @@ class GameOfLife:
         pass
 
     def __repr__(self):
-        world_string = ['.' * self.width] * self.height
+        world_string = ['.' * self._view_width] * self._view_height
         for x, y in self.cell_iter():
             if self.is_alive(x, y):
                 world_string[x - 1] = world_string[x - 1][:y - 1] + '*' + world_string[x - 1][y:]
@@ -61,5 +63,5 @@ class GameOfLife:
         return False
 
     def cell_iter(self):
-        for x, y in product(range(self.width), range(self.height)):
+        for x, y in product(range(self._view_width), range(self._view_height)):
             yield x + 1, y + 1
