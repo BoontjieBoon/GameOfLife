@@ -9,6 +9,10 @@ class TestClass(unittest.TestCase):
         self.assertTrue(game.is_alive(1, 1), "Cell should be alive")
         game.set_dead(1, 1)
         self.assertFalse(game.is_alive(1, 1), "Cell should be dead")
+        game.set_alive(1000, 1000)
+        self.assertTrue(game.is_alive(1000, 1000), "Cell should be alive")
+        game.set_dead(1000, 1000)
+        self.assertFalse(game.is_alive(1000, 1000), "Cell should be dead")
 
     def test_cell_dies_with_no_neighbours(self):
         game = GameOfLife()
