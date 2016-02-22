@@ -16,12 +16,12 @@ class TestClass(unittest.TestCase):
 
     def test_set_parameters_are_integers(self):
         game = GameOfLife()
-        self.assertRaises(ValueError, game.set_alive, 0.5, 1)
-        self.assertRaises(ValueError, game.set_alive, 1, 0.5)
-        self.assertRaises(ValueError, game.is_alive, 0.5, 1)
-        self.assertRaises(ValueError, game.is_alive, 1, 0.5)
-        self.assertRaises(ValueError, game.set_dead, 0.5, 1)
-        self.assertRaises(ValueError, game.set_dead, 1, 0.5)
+        self.assertRaises(TypeError, game.set_alive, 0.5, 1)
+        self.assertRaises(TypeError, game.set_alive, 1, 0.5)
+        self.assertRaises(TypeError, game.is_alive, 0.5, 1)
+        self.assertRaises(TypeError, game.is_alive, 1, 0.5)
+        self.assertRaises(TypeError, game.set_dead, 0.5, 1)
+        self.assertRaises(TypeError, game.set_dead, 1, 0.5)
 
     def test_cell_dies_with_no_neighbours(self):
         game = GameOfLife()

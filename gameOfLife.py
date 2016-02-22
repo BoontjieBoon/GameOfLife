@@ -63,6 +63,6 @@ class GameOfLife:
     @staticmethod
     def check_values(x, y):
         if not isinstance(x, int):
-            raise ValueError("x should be an integer")
+            raise TypeError("x should be an integer")
         if not isinstance(y, int):
-            raise ValueError("y should be an integer")
+            raise TypeError("y should be an integer")
