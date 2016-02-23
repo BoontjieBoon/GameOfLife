@@ -66,7 +66,7 @@ class TestClass(unittest.TestCase):
         game.set_alive(3, 4)
         self.assertTrue(game.is_alive(3, 3), "Cell should be alive before the tick")
         game.tick()
-        self.assertFalse(game.is_alive(3, 3), "Cell should die with 3 or more neighbours")
+        self.assertFalse(game.is_alive(3, 3), "Cell should die with four or more neighbours")
 
     def test_cell_becomes_alive_with_three_neighbours(self):
         game = GameOfLife()
@@ -75,7 +75,7 @@ class TestClass(unittest.TestCase):
         game.set_alive(4, 3)
         self.assertFalse(game.is_alive(3, 3), "Cell should be dead before the tick")
         game.tick()
-        self.assertTrue(game.is_alive(3, 3), "Cell should survive with three neighbours")
+        self.assertTrue(game.is_alive(3, 3), "Cell should become alive with three neighbours")
 
     def test_cell_stays_dead_with_two_neighbours(self):
         game = GameOfLife()
